@@ -40,7 +40,7 @@ require "settings/init.php";
             <span class="input-group-text" id="basic-addon1">Bredde</span>
             <input type="text" class="form-control" id="vinduewidth" placeholder="Centimeter" aria-label="width" aria-describedby="basic-addon1">
         </div>
-        <a href="rummaal.php">
+        <a href="doorside.php">
             <button type="button" class="btn btn-primary btn-lg ps-4 pe-4 pt-2 pb-2">Næste</button>
         </a>
     </div>

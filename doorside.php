@@ -105,27 +105,13 @@ require "settings/init.php";
     <script>
         const savedHeight = sessionStorage.getItem("height");
         const savedWidth = sessionStorage.getItem("width");
-        const savedVindueHeight = sessionStorage.getItem("vindueHeight");
-        const savedVindueWidth = sessionStorage.getItem("vindueWidth");
 
         // Find div'en og span-elementerne, som skal opdateres
         const divrum = document.getElementById("divrum");
         const savedHeightSpan = document.getElementById("savedHeight");
         const savedWidthSpan = document.getElementById("savedWidth");
 
-                const divvindue = document.getElementById("divvindue");
-                const savedVindueHeightSpan = document.getElementById(savedVindueHeight);
-                const savedVindueHeightSpan = document.getElementById(savedVindueWidth);
 
-                if (savedVindueHeight && savedVindueWidth) {
-                    // Opdater div-størrelsen
-                    divvindue.style.height = savedVindueHeight + "px";
-                    divvindue.style.width = savedVindueWidth + "px";
-
-                    // Opdater tekstindholdet i span-elementerne
-                    savedHeightSpan.textContent = savedVindueHeight || "Ikke sat";
-                    savedWidthSpan.textContent = savedVindueWidth || "Ikke sat";
-                }
         // Check om der er gemte værdier i sessionStorage
         if (savedHeight && savedWidth) {
             // Opdater div-størrelsen
@@ -142,11 +128,45 @@ require "settings/init.php";
     </script>
 
     <script>
+        const savedVindueHeight = sessionStorage.getItem("vindueHeight");
+        const savedVindueWidth = sessionStorage.getItem("vindueWidth");
+
+        const divvindue = document.getElementById("divvindue");
+        const savedVindueHeightSpan = document.getElementById(savedVindueHeight);
+        const savedVindueHeightSpan = document.getElementById(savedVindueWidth);
+
+        if (savedVindueHeight && savedVindueWidth) {
+            // Opdater div-størrelsen
+            divvindue.style.height = savedVindueHeight + "px";
+            divvindue.style.width = savedVindueWidth + "px";
+
+            // Opdater tekstindholdet i span-elementerne
+            savedHeightSpan.textContent = savedVindueHeight || "Ikke sat";
+            savedWidthSpan.textContent = savedVindueWidth || "Ikke sat";
+        }
+        else {
+            // Hvis ingen data er gemt, vis en fejlmeddelelse på siden
+            divrum.innerHTML = "<p style='color: red;'>Der er sket en fejl. Gå venligst tilbage til sidste side og prøv igen.</p>";
+        }
+
+        const savedX = sessionStorage.getItem("divvindueX");
+        const savedY = sessionStorage.getItem("divvindueY");
+
+
+
+    </script>
+
+    <script>
         const divvinduemove = document.querySelector("#divvindue");
         const divrummove = document.querySelector("#divrum");
 
         let isDragging = false;
         let offsetX, offsetY;
+
+        if (savedX !== null && savedY !== null) {
+            divvinduemove.style.left = savedX + "px";
+            divvinduemove.style.top = savedY + "px";
+        }
 
         // Start dragging on mousedown
         divvinduemove.addEventListener("mousedown", (event) => {
