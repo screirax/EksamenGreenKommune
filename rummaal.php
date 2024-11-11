@@ -120,6 +120,7 @@ require "settings/init.php";
     const widthInput = document.querySelector("#width")
     const divtest = document.querySelector("#divtest");
 
+
     // Add an event listener for the 'input' event on the input field
     heightInput.addEventListener("input", () => {
         // Get the value from the input field
