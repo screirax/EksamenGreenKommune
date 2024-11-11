@@ -12,7 +12,7 @@ require "settings/init.php";
 	<meta name="author" content="Udgiver">
 	<meta name="copyright" content="Information om copyright">
     <?php include 'settings/links.php'?>
-
+    <link href="css/styles.css" rel="stylesheet" type="text/css">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -23,8 +23,10 @@ require "settings/init.php";
 
 <div class="container-fluid">
     <?php include 'settings/header.php';
-    include 'settings/menu.php'?>
+    ?>
 </div>
+<?php include 'settings/menu.php';?>
+
 <div class="container col-12 col-md-12 d-flex flex-column flex-md-row justify-content-between mt-1 bg-body-tertiary">
 
     <div class="mt-5 col-12 col-md-6">
