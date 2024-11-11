@@ -27,9 +27,9 @@ require "settings/init.php";
 </div>
 <?php include 'settings/menu.php';?>
 
-<div class="container col-12 col-md-12 d-flex flex-column flex-md-row justify-content-between mt-1 bg-body-tertiary">
+<div class="container col-12 col-md-12 d-flex flex-column flex-md-row justify-content-between mt-1 bg-body-tertiary gap-3">
 
-    <div class="mt-5 col-12 col-md-6">
+    <div class="mt-5 col-12 col-md-6 ">
         <img class="img-fluid" src="pictures/aabning-nr40.webp">
     </div>
 

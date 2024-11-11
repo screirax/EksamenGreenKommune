@@ -22,8 +22,9 @@ require "settings/init.php";
 
 <div class="container-fluid">
     <?php include 'settings/header.php';
-    include 'settings/menu.php'?>
+    ?>
 </div>
+<?php include 'settings/menu.php';?>
 <!--
 <div class="container col-12 col-md-12 d-flex flex-column flex-md-row justify-content-between mt-1 bg-body-tertiary">
 
