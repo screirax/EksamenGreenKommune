@@ -29,9 +29,9 @@ require "settings/init.php";
 
 
     <div class="col-12 col-md-4 mt-5">
-        <a href="rummaal.php" style="color: #000000"><i class="bi bi-arrow-left"></i>Tilbage</a>
-        <h3 class="text-left mt-2">Vindue</h3>
-        <p>Her kan du skrive målene på dit vindue op og<br> bevæge det hen hvor dit vindue normalt er</p>
+        <a href="vindueside.php" style="color: #000000"><i class="bi bi-arrow-left"></i>Tilbage</a>
+        <h3 class="text-left mt-2">Dør</h3>
+        <p>Her kan du skrive målene på din dør og<br> bevæge den der hen hvor din dør normalt er</p>
         <div class="input-group mb-3 w-50 mt-4">
             <span class="input-group-text" id="basic-addon1">Højde</span>
             <input type="text" class="form-control" id="vindueheight" placeholder="Centimeter" aria-label="height" aria-describedby="basic-addon1">
@@ -47,7 +47,8 @@ require "settings/init.php";
 
     <div class="mt-5 col-12 col-md-8">
         <div class="mb-3" id="divrum" style="border: 2px solid black; background-color: #F0E5DD; position: relative;">
-            <div id="divvindue" style="border: 1px solid black; background-color: #6f42c1; position: absolute; width: 100px; height: 100px; cursor: grab;"></div>
+            <div id="divvindue" style="border: 1px solid black; background-color: #6f42c1; position: absolute; width: 100px; height: 100px;"></div>
+            <div id="divdoor" style="border: 1px solid black; background-color: #0f5132; position: absolute; width: 100px; height: 100px; cursor: grab;"></div>
             <p class="text-center mt-3">Din Væg</p>
         </div>
     </div>
@@ -56,48 +57,48 @@ require "settings/init.php";
 
     <script>
         // Select the input field and div element
-        const vindueHeightInput = document.querySelector("#vindueheight");
-        const vindueWidthInput = document.querySelector("#vinduewidth")
-        const divvindue = document.querySelector("#divvindue");
+        const doorHeightInput = document.querySelector("#doorheight");
+        const doorWidthInput = document.querySelector("#doorwidth")
+        const divdoor = document.querySelector("#divdoor");
 
 
         // Add an event listener for the 'input' event on the input field
-        vindueHeightInput.addEventListener("input", () => {
+        doorHeightInput.addEventListener("input", () => {
             // Get the value from the input field
-            let vindueHeightValue = vindueHeightInput.value;
+            let doorHeightValue = doorHeightInput.value;
 
-            if (vindueHeightValue > 850) {
-                vindueHeightValue = vindueHeightValue / 2;
+            if (doorHeightValue > 850) {
+                doorHeightValue = doorHeightValue / 2;
             }
 
             // Log the value to the console
-            console.log(vindueHeightValue);
+            console.log(doorHeightValue);
 
             // Update the width of divtest based on the input value
-            divvindue.style.height = vindueHeightValue + "px";
+            divdoor.style.height = doorHeightValue + "px";
         });
 
         // Event listener for width input
-        vindueWidthInput.addEventListener("input", () => {
-            let vindueWidthValue = parseFloat(vindueWidthInput.value); // Parse to a number
+        doorWidthInput.addEventListener("input", () => {
+            let doorWidthValue = parseFloat(doorWidthInput.value); // Parse to a number
 
             // Check if widthValue is greater than 850
-            if (vindueWidthValue > 850) {
-                vindueWidthValue = vindueWidthValue / 2; // Halve the value if over 850
+            if (doorWidthValue > 850) {
+                doorWidthValue = doorWidthValue / 2; // Halve the value if over 850
             }
 
             // Update the width of divtest based on the adjusted input value
-            divvindue.style.width = vindueWidthValue + "px";
+            divdoor.style.width = doorWidthValue + "px";
         });
 
-        function saveVindueInputDataToStorage() {
-            sessionStorage.setItem("vindueHeight", vindueHeightInput.value);
-            sessionStorage.setItem("vindueWidth", vindueWidthInput.value);
+        function saveDoorInputDataToStorage() {
+            sessionStorage.setItem("doorHeight", doorHeightInput.value);
+            sessionStorage.setItem("doorWidth", doorWidthInput.value);
 
         }
 
-        vindueHeightInput.addEventListener("input", saveVindueInputDataToStorage);
-        vindueWidthInput.addEventListener("input", saveVindueInputDataToStorage);
+        doorHeightInput.addEventListener("input", saveDoorInputDataToStorage);
+        doorWidthInput.addEventListener("input", saveDoorInputDataToStorage);
 
 
     </script>
@@ -133,7 +134,7 @@ require "settings/init.php";
 
         const divvindue = document.getElementById("divvindue");
         const savedVindueHeightSpan = document.getElementById(savedVindueHeight);
-        const savedVindueHeightSpan = document.getElementById(savedVindueWidth);
+        const savedVindueWidthSpan = document.getElementById(savedVindueWidth);
 
         if (savedVindueHeight && savedVindueWidth) {
             // Opdater div-størrelsen
@@ -162,6 +163,10 @@ require "settings/init.php";
 
         let isDragging = false;
         let offsetX, offsetY;
+
+        // Hent gemte positioner fra sessionStorage, hvis de findes
+        const savedX = sessionStorage.getItem("divvindueX");
+        const savedY = sessionStorage.getItem("divvindueY");
 
         if (savedX !== null && savedY !== null) {
             divvinduemove.style.left = savedX + "px";
