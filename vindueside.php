@@ -1,37 +1,41 @@
 <?php
+// Inkluderer indstillinger og init-fil, sandsynligvis for databaseforbindelse og andre basale funktioner
 require "settings/init.php";
 ?>
 <!DOCTYPE html>
 <html lang="da">
 <head>
     <meta charset="utf-8">
-
     <title>ILVA</title>
 
+    <!-- Meta tags for SEO og copyright -->
     <meta name="robots" content="All">
     <meta name="author" content="Udgiver">
     <meta name="copyright" content="Information om copyright">
+    <!-- Inkluderer links til CSS, JS osv. fra links.php -->
     <?php include 'settings/links.php'?>
 
-
+    <!-- Responsiv viewport-indstilling -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
 
+<!-- Inkluderer topsektion, sandsynligvis en header -->
 <?php include 'settings/headertop.php';?>
 
 <div class="container-fluid">
+    <!-- Inkluderer header og menu i containeren -->
     <?php include 'settings/header.php';
     include 'settings/menu.php'?>
 </div>
+
 <div class="container col-12 col-md-12 d-flex flex-column flex-md-row justify-content-between mt-1 bg-body-tertiary">
-
-
+    <!-- Venstre kolonne med tekst og inputfelter til at angive dimensioner for et vindue -->
     <div class="col-12 col-md-4 mt-5">
         <a href="rummaal.php" style="color: #000000"><i class="bi bi-arrow-left"></i>Tilbage</a>
         <h3 class="text-left mt-2">Vindue</h3>
-        <p>Her kan du skrive målene på dit vindue op og<br> bevæge det hen hvor dit vindue normalt er</p>
+        <p>Her kan du skrive målene på dit vindue op og bevæge det med brug af mus hen hvor dit vindue normalt er</p>
         <div class="input-group mb-3 w-50 mt-4">
             <span class="input-group-text" id="basic-addon1">Højde</span>
             <input type="text" class="form-control" id="vindueheight" placeholder="Centimeter" aria-label="height" aria-describedby="basic-addon1">
@@ -40,11 +44,13 @@ require "settings/init.php";
             <span class="input-group-text" id="basic-addon1">Bredde</span>
             <input type="text" class="form-control" id="vinduewidth" placeholder="Centimeter" aria-label="width" aria-describedby="basic-addon1">
         </div>
+        <!-- Næste-knap der leder videre til en anden side -->
         <a href="doorside.php">
             <button type="button" class="btn btn-primary btn-lg ps-4 pe-4 pt-2 pb-2">Næste</button>
         </a>
     </div>
 
+    <!-- Højre kolonne med div'er for at vise væg og vindue som en visuel repræsentation -->
     <div class="mt-5 col-12 col-md-8">
         <div class="mb-3" id="divrum" style="border: 2px solid black; background-color: #F0E5DD; position: relative;">
             <div id="divvindue" style="border: 1px solid black; background-color: #6f42c1; position: absolute; width: 100px; height: 100px; cursor: grab;"></div>
@@ -52,104 +58,67 @@ require "settings/init.php";
         </div>
     </div>
 
-
-
+    <!-- Script til at justere højden og bredden af vinduet baseret på brugerinput -->
     <script>
-        // Select the input field and div element
         const vindueHeightInput = document.querySelector("#vindueheight");
         const vindueWidthInput = document.querySelector("#vinduewidth")
         const divvindue = document.querySelector("#divvindue");
 
-
-        // Add an event listener for the 'input' event on the input field
+        // Eventlistener til højdeinputfeltet
         vindueHeightInput.addEventListener("input", () => {
-            // Get the value from the input field
             let vindueHeightValue = vindueHeightInput.value;
 
+            // Hvis højde > 850 cm, skaleres værdien ned til det halve
             if (vindueHeightValue > 850) {
                 vindueHeightValue = vindueHeightValue / 2;
             }
-
-            // Log the value to the console
-            console.log(vindueHeightValue);
-
-            // Update the width of divtest based on the input value
-            divvindue.style.height = vindueHeightValue + "px";
+            divvindue.style.height = vindueHeightValue + "px"; // Opdaterer vinduets højde i DOM
         });
 
-        // Event listener for width input
+        // Eventlistener til breddeinputfeltet
         vindueWidthInput.addEventListener("input", () => {
-            let vindueWidthValue = parseFloat(vindueWidthInput.value); // Parse to a number
+            let vindueWidthValue = parseFloat(vindueWidthInput.value);
 
-            // Check if widthValue is greater than 850
+            // Hvis bredde > 850 cm, skaleres værdien ned til det halve
             if (vindueWidthValue > 850) {
-                vindueWidthValue = vindueWidthValue / 2; // Halve the value if over 850
+                vindueWidthValue = vindueWidthValue / 2;
             }
-
-            // Update the width of divtest based on the adjusted input value
-            divvindue.style.width = vindueWidthValue + "px";
+            divvindue.style.width = vindueWidthValue + "px"; // Opdaterer vinduets bredde i DOM
         });
 
+        // Funktion til at gemme inputdata for højde og bredde i sessionStorage
         function saveVindueInputDataToStorage() {
             sessionStorage.setItem("vindueHeight", vindueHeightInput.value);
             sessionStorage.setItem("vindueWidth", vindueWidthInput.value);
-
         }
 
+        // Gemmer data hver gang brugeren ændrer værdierne
         vindueHeightInput.addEventListener("input", saveVindueInputDataToStorage);
         vindueWidthInput.addEventListener("input", saveVindueInputDataToStorage);
-
-
     </script>
 
-    <script>
-        const savedVindueHeight = sessionStorage.getItem("vindueHeight");
-        const savedVindueWidth = sessionStorage.getItem("vindueWidth");
-
-        // Find div'en og span-elementerne, som skal opdateres
-        const divvindue = document.getElementById("divvindue");
-        const savedVindueHeightSpan = document.getElementById("savedVindueHeight");
-        const savedVindueWidthSpan = document.getElementById("savedVindueWidth");
-
-        // Check om der er gemte værdier i sessionStorage
-        if (savedVindueHeight && savedVindueWidth) {
-            // Opdater div-størrelsen
-            divvindue.style.height = savedVindueHeight + "px";
-            divvindue.style.width = savedVindueWidth + "px";
-
-            // Opdater tekstindholdet i span-elementerne
-            savedVindueHeightSpan.textContent = savedVindueHeight || "Ikke sat";
-            savedVindueWidthSpan.textContent = savedVindueWidth || "Ikke sat";
-        } else {
-            // Hvis ingen data er gemt, vis en fejlmeddelelse på siden
-            divvindue.innerHTML = "<p style='color: red;'>Der er sket en fejl. Gå venligst tilbage til sidste side og prøv igen.</p>";
-        }
-    </script>
-
+    <!-- Script til at hente og bruge gemte data fra sessionStorage -->
     <script>
         const savedHeight = sessionStorage.getItem("height");
         const savedWidth = sessionStorage.getItem("width");
 
-        // Find div'en og span-elementerne, som skal opdateres
         const divrum = document.getElementById("divrum");
         const savedHeightSpan = document.getElementById("savedHeight");
         const savedWidthSpan = document.getElementById("savedWidth");
 
-        // Check om der er gemte værdier i sessionStorage
+        // Hvis gemte data findes, opdateres divrum's dimensioner og span-elementerne
         if (savedHeight && savedWidth) {
-            // Opdater div-størrelsen
             divrum.style.height = savedHeight + "px";
             divrum.style.width = savedWidth + "px";
-
-            // Opdater tekstindholdet i span-elementerne
             savedHeightSpan.textContent = savedHeight || "Ikke sat";
             savedWidthSpan.textContent = savedWidth || "Ikke sat";
         } else {
-            // Hvis ingen data er gemt, vis en fejlmeddelelse på siden
+            // Fejlmeddelelse, hvis data ikke er tilgængelige
             divrum.innerHTML = "<p style='color: red;'>Der er sket en fejl. Gå venligst tilbage til sidste side og prøv igen.</p>";
         }
     </script>
 
+    <!-- Script til at muliggøre træk-og-slip af vinduesdiv'en -->
     <script>
         const divvinduemove = document.querySelector("#divvindue");
         const divrummove = document.querySelector("#divrum");
@@ -157,16 +126,7 @@ require "settings/init.php";
         let isDragging = false;
         let offsetX, offsetY;
 
-        // Hent gemte positioner fra sessionStorage, hvis de findes
-        const savedX = sessionStorage.getItem("divvindueX");
-        const savedY = sessionStorage.getItem("divvindueY");
-
-        if (savedX !== null && savedY !== null) {
-            divvinduemove.style.left = savedX + "px";
-            divvinduemove.style.top = savedY + "px";
-        }
-
-        // Start dragging on mousedown
+        // Starter trækbevægelse ved mousedown
         divvinduemove.addEventListener("mousedown", (event) => {
             isDragging = true;
             offsetX = event.clientX - divvinduemove.offsetLeft;
@@ -174,13 +134,13 @@ require "settings/init.php";
             divvinduemove.style.cursor = "grabbing";
         });
 
-        // Move element on mousemove
+        // Flytter element ved mousemove
         document.addEventListener("mousemove", (event) => {
             if (isDragging) {
                 let x = event.clientX - offsetX;
                 let y = event.clientY - offsetY;
 
-                // Constrain movement within divrum boundaries
+                // Begrænser bevægelsen inden for grænserne af divrum
                 const divrumRect = divrummove.getBoundingClientRect();
                 const divvindueRect = divvinduemove.getBoundingClientRect();
 
@@ -192,27 +152,21 @@ require "settings/init.php";
             }
         });
 
-        // Stop dragging on mouseup
+        // Stopper trækbevægelse ved mouseup og gemmer positionen i sessionStorage
         document.addEventListener("mouseup", () => {
             if (isDragging) {
                 isDragging = false;
                 divvinduemove.style.cursor = "grab";
-
-                // Gem nuværende position i sessionStorage
                 const currentX = divvinduemove.offsetLeft;
                 const currentY = divvinduemove.offsetTop;
                 sessionStorage.setItem("divvindueX", currentX);
                 sessionStorage.setItem("divvindueY", currentY);
             }
-
         });
-
-
     </script>
 </div>
 
-
-
+<!-- Sektion der er udkommenteret, sandsynligvis for at hente og vise produkter fra databasen -->
 <?php /*
 <div class="row g-2">
 	<?php
@@ -228,7 +182,7 @@ require "settings/init.php";
 				</div>
                 <div class="card-body">
                     <?php
-                    echo '<img src="data:image/jpeg;base64,' . base64_encode($produkt->prodBillede) . '" alt="Produkt billede" style="max-width:100%; height: auto;">';
+                    echo '<img src="data:image/jpeg;base64,' . base64_encode($produkt->prodBillede
                     ?>
                 </div>
 
@@ -251,7 +205,7 @@ require "settings/init.php";
 	?>
 </div>
 */?>
-
+<!--Inkludere buttomscripts og footer-->
 <?php include 'settings/buttomscripts.php';
 include 'settings/footer.php';?>
 </body>

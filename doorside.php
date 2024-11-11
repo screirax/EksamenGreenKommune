@@ -34,14 +34,14 @@ require "settings/init.php";
         <p>Her kan du skrive målene på din dør og<br> bevæge den der hen hvor din dør normalt er</p>
         <div class="input-group mb-3 w-50 mt-4">
             <span class="input-group-text" id="basic-addon1">Højde</span>
-            <input type="text" class="form-control" id="vindueheight" placeholder="Centimeter" aria-label="height" aria-describedby="basic-addon1">
+            <input type="text" class="form-control" id="doorheight" placeholder="Centimeter" aria-label="height" aria-describedby="basic-addon1">
         </div>
         <div class="input-group mb-3 w-50 mt-4">
             <span class="input-group-text" id="basic-addon1">Bredde</span>
-            <input type="text" class="form-control" id="vinduewidth" placeholder="Centimeter" aria-label="width" aria-describedby="basic-addon1">
+            <input type="text" class="form-control" id="doorwidth" placeholder="Centimeter" aria-label="width" aria-describedby="basic-addon1">
         </div>
-        <a href="rummaal.php">
-            <button type="button" class="btn btn-primary btn-lg ps-4 pe-4 pt-2 pb-2">Næste</button>
+        <a href="ditrum.php">
+            <button type="button" class="btn btn-primary btn-lg ps-4 pe-4 pt-2 pb-2">Opret Dit Rum</button>
         </a>
     </div>
 
@@ -54,7 +54,7 @@ require "settings/init.php";
     </div>
 
 
-
+    <!--Sætter højde og bredde på vores dør-->
     <script>
         // Select the input field and div element
         const doorHeightInput = document.querySelector("#doorheight");
@@ -102,7 +102,7 @@ require "settings/init.php";
 
 
     </script>
-
+    <!--Henter data fra sessionstorage til at øndre hight og width til vores divrum-->
     <script>
         const savedHeight = sessionStorage.getItem("height");
         const savedWidth = sessionStorage.getItem("width");
@@ -127,7 +127,7 @@ require "settings/init.php";
             divrum.innerHTML = "<p style='color: red;'>Der er sket en fejl. Gå venligst tilbage til sidste side og prøv igen.</p>";
         }
     </script>
-
+    <!--Henter data fra sessionstorage til at ændre hight og width til vores divvindue-->
     <script>
         const savedVindueHeight = sessionStorage.getItem("vindueHeight");
         const savedVindueWidth = sessionStorage.getItem("vindueWidth");
@@ -156,29 +156,36 @@ require "settings/init.php";
 
 
     </script>
-
+    <!--Henter data til placering af divvindue x og y-->
     <script>
-        const divvinduemove = document.querySelector("#divvindue");
+        // Hent gemte positioner for divvindue
+        document.addEventListener("DOMContentLoaded", () => {
+            const divvindue = document.querySelector("#divvindue");
+
+            const savedX = sessionStorage.getItem("divvindueX");
+            const savedY = sessionStorage.getItem("divvindueY");
+
+            if (savedX !== null && savedY !== null) {
+                divvindue.style.left = savedX + "px";
+                divvindue.style.top = savedY + "px";
+            }
+        });
+    </script>
+    <!--Bevæger dær og sætter x og y på den-->
+    <script>
+        const divdoormove = document.querySelector("#divdoor");
         const divrummove = document.querySelector("#divrum");
 
         let isDragging = false;
         let offsetX, offsetY;
 
-        // Hent gemte positioner fra sessionStorage, hvis de findes
-        const savedX = sessionStorage.getItem("divvindueX");
-        const savedY = sessionStorage.getItem("divvindueY");
-
-        if (savedX !== null && savedY !== null) {
-            divvinduemove.style.left = savedX + "px";
-            divvinduemove.style.top = savedY + "px";
-        }
 
         // Start dragging on mousedown
-        divvinduemove.addEventListener("mousedown", (event) => {
+        divdoormove.addEventListener("mousedown", (event) => {
             isDragging = true;
-            offsetX = event.clientX - divvinduemove.offsetLeft;
-            offsetY = event.clientY - divvinduemove.offsetTop;
-            divvinduemove.style.cursor = "grabbing";
+            offsetX = event.clientX - divdoormove.offsetLeft;
+            offsetY = event.clientY - divdoormove.offsetTop;
+            divdoormove.style.cursor = "grabbing";
         });
 
         // Move element on mousemove
@@ -189,22 +196,36 @@ require "settings/init.php";
 
                 // Constrain movement within divrum boundaries
                 const divrumRect = divrummove.getBoundingClientRect();
-                const divvindueRect = divvinduemove.getBoundingClientRect();
+                const divdoorRect = divdoormove.getBoundingClientRect();
 
-                x = Math.max(0, Math.min(x, divrumRect.width - divvindueRect.width));
-                y = Math.max(0, Math.min(y, divrumRect.height - divvindueRect.height));
+                x = Math.max(0, Math.min(x, divrumRect.width - divdoorRect.width));
+                y = Math.max(0, Math.min(y, divrumRect.height - divdoorRect.height));
 
-                divvinduemove.style.left = x + "px";
-                divvinduemove.style.top = y + "px";
+                divdoormove.style.left = x + "px";
+                divdoormove.style.top = y + "px";
             }
         });
 
         // Stop dragging on mouseup
         document.addEventListener("mouseup", () => {
-            isDragging = false;
-            divvinduemove.style.cursor = "grab";
+            if (isDragging) {
+                isDragging = false;
+                divdoormove.style.cursor = "grab";
+
+                // Gem nuværende position i sessionStorage
+                const currentX = divdoormove.offsetLeft;
+                const currentY = divdoormove.offsetTop;
+                sessionStorage.setItem("divdoorX", currentX);
+                sessionStorage.setItem("divdoorY", currentY);
+            }
+
         });
+
+
     </script>
+
+
+
 </div>
 
 

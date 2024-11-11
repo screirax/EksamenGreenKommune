@@ -5,7 +5,7 @@
 
 </div>
 -->
-<link href="../css/styles.scss" rel="stylesheet">
+
 
 
 <nav class="nav-menu">
