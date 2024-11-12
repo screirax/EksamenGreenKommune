@@ -83,18 +83,8 @@ require "settings/init.php";
 
 <div class="container col-12 col-md-12 d-flex flex-column flex-md-row justify-content-between mt-1 bg-body-tertiary">
     <div class="col-12 col-md-4 mt-5">
-        <h2 class="text-left">Vælg en væg,<Br> skriv dine mål</h2>
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle mt-4 p-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Vælg Væg
-            </button>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Nord Væg</a></li>
-                <li><a class="dropdown-item" href="#">Syd Væg</a></li>
-                <li><a class="dropdown-item" href="#">Øst Væg</a></li>
-                <li><a class="dropdown-item" href="#">Vest Væg</a></li>
-            </ul>
-        </div>
+        <h2 class="text-left">Væg</h2>
+        <p>Her under skriver du dine mål højde og bredde<br> for den væg du gerne vil skrive op</p>
         <div class="input-group mb-3 w-50 mt-4">
             <span class="input-group-text" id="basic-addon1">Højde</span>
             <input type="text" class="form-control" id="height" placeholder="Centimeter" aria-label="height" aria-describedby="basic-addon1">
@@ -115,12 +105,18 @@ require "settings/init.php";
     </div>
 </div>
 
+
+<!-- Det er også her vi fjerner vores sessionstorage fra tidligere omrettelser af vinduer-->
 <script>
     // Select the input field and div element
     const heightInput = document.querySelector("#height");
     const widthInput = document.querySelector("#width")
     const divtest = document.querySelector("#divtest");
 
+
+    // Fjerner specifikke værdier fra sessionStorage
+    sessionStorage.removeItem("height");
+    sessionStorage.removeItem("width");
 
     // Add an event listener for the 'input' event on the input field
     heightInput.addEventListener("input", () => {
@@ -146,11 +142,8 @@ require "settings/init.php";
         if (widthValue > 850) {
             widthValue = widthValue / 2; // Halve the value if over 850
         }
-        // Begræns til maksimalt 90% af skærmens bredde (eksempelværdi)
-        const maxWidth = window.innerWidth * 0.9;
-        if (widthValue > maxWidth) {
-            widthValue = maxWidth;
-        }
+
+
         // Update the width of divtest based on the adjusted input value
         divtest.style.width = widthValue + "px";
     });

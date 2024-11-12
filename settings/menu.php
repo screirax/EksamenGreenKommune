@@ -6,8 +6,6 @@
 </div>
 -->
 
-
-
 <nav class="nav-menu">
     <ul>
         <li>
@@ -17,8 +15,8 @@
             </a>
         </li>
         <li>
-            <a href="#">
-                <img src="pictures/sofaer.png" alt="Sofa icon">
+            <a href="sofa.php" id="sofaklik">
+                <img src="pictures/sofaer.png" alt="Sofa icon" id="sofaBillede">
                 <span>Sofaer</span>
             </a>
         </li>

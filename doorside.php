@@ -55,12 +55,18 @@ require "settings/init.php";
 
 
     <!--Sætter højde og bredde på vores dør-->
+    <!-- Det er også her vi fjerner vores sessionstorage fra tidligere omrettelser af vinduer-->
     <script>
         // Select the input field and div element
         const doorHeightInput = document.querySelector("#doorheight");
         const doorWidthInput = document.querySelector("#doorwidth")
         const divdoor = document.querySelector("#divdoor");
 
+        // Fjerner specifikke værdier fra sessionStorage
+        sessionStorage.removeItem("doorHeight");
+        sessionStorage.removeItem("doorWidth");
+        sessionStorage.removeItem("divdoorX");
+        sessionStorage.removeItem("divdoorY");
 
         // Add an event listener for the 'input' event on the input field
         doorHeightInput.addEventListener("input", () => {

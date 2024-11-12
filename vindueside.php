@@ -59,6 +59,7 @@ require "settings/init.php";
     </div>
 
     <!-- Script til at justere højden og bredden af vinduet baseret på brugerinput -->
+    <!-- Det er også her vi fjerner vores sessionstorage fra tidligere omrettelser af vinduer-->
     <script>
         const vindueHeightInput = document.querySelector("#vindueheight");
         const vindueWidthInput = document.querySelector("#vinduewidth")

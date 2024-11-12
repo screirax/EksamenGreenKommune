@@ -1,6 +1,19 @@
 <?php
 require "settings/init.php";
+session_start();
+
+if (isset($_GET['prodId'])) {
+    $prodId = $_GET['prodId'];
+
+    // Tilføj produktet til kurven (sessionen)
+    if (!isset($_SESSION['cart'])) {
+        $_SESSION['cart'] = [];
+    }
+    $_SESSION['cart'][] = $prodId;
+}
+
 ?>
+
 <!DOCTYPE html>
 <html lang="da">
 <head>
@@ -29,6 +42,30 @@ require "settings/init.php";
 
 
     <div class="col-12 col-md-4 mt-5">
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            <div class="col">
+                <div class="card-body">
+                    <img src="data:image/jpeg;base64,<?php echo base64_encode($produkt->prodBillede); ?>" alt="Produkt billede" style="width: 200px; height: 200px;">
+
+                    <?php
+                    //echo $produkt->prodNavn;
+                    ?>
+
+                </div>
+                <div class="card-body mb-3">
+                    <h5 class="card-title"><?php echo $produkt ->prodNavn; ?></h5>
+                    <?php
+                    //echo '<img src="data:image/jpeg;base64,' . base64_encode($produkt->prodBillede) . '" alt="Produkt billede" style="max-width:100%; height: auto;">';
+                    ?>
+                    <p class="card-text"><?php echo $produkt ->prodBeskrivelse; ?> </p>
+                    <p class="card-text"><?php echo $produkt ->prodPris ?></p>
+                    <a href="ditrum.php?prodId=<?php echo $produkt->prodId; ?>">
+                        <button type="button" class="btn btn-primary btn-lg">Tilføj</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+
         <h3 class="text-left mt-2">Dit Rum</h3>
         <p>Du er nu i stand til at klikke på på fra vores kataloger og sætte ind på din væg</p>
 
