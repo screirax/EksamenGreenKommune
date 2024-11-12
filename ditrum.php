@@ -89,7 +89,8 @@ require "settings/init.php";
         }
         else {
             // Hvis ingen data er gemt, vis en fejlmeddelelse på siden
-            divrum.innerHTML = "<p style='color: red;'>Der er sket en fejl. Gå venligst tilbage til sidste side og prøv igen.</p>";
+            divvindue.style.display = 'none';
+
         }
 
         const savedX = sessionStorage.getItem("divvindueX");
@@ -118,7 +119,7 @@ require "settings/init.php";
                 savedDoorWidthSpan.textContent = savedDoorWidth || "Ikke sat";
             } else {
                 // Hvis ingen data er gemt, vis en fejlmeddelelse på divdoor
-                divdoor.innerHTML = "<p style='color: red;'>Der er sket en fejl. Gå venligst tilbage til sidste side og prøv igen.</p>";
+                divdoor.style.display = 'none';
             }
 
             const savedX = sessionStorage.getItem("divDoorX");

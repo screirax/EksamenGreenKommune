@@ -64,6 +64,12 @@ require "settings/init.php";
         const vindueWidthInput = document.querySelector("#vinduewidth")
         const divvindue = document.querySelector("#divvindue");
 
+        // Fjerner specifikke værdier fra sessionStorage
+        sessionStorage.removeItem("vindueHeight");
+        sessionStorage.removeItem("vindueWidth");
+        sessionStorage.removeItem("divvindueX");
+        sessionStorage.removeItem("divvindueY");
+
         // Eventlistener til højdeinputfeltet
         vindueHeightInput.addEventListener("input", () => {
             let vindueHeightValue = vindueHeightInput.value;

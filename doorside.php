@@ -147,7 +147,8 @@ require "settings/init.php";
         }
         else {
             // Hvis ingen data er gemt, vis en fejlmeddelelse på siden
-            divrum.innerHTML = "<p style='color: red;'>Der er sket en fejl. Gå venligst tilbage til sidste side og prøv igen.</p>";
+            divvindue.style.display = 'none';
+
         }
 
         const savedX = sessionStorage.getItem("divvindueX");

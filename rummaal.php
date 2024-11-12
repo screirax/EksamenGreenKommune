@@ -146,7 +146,11 @@ require "settings/init.php";
         if (widthValue > 850) {
             widthValue = widthValue / 2; // Halve the value if over 850
         }
-
+        // Begræns til maksimalt 90% af skærmens bredde (eksempelværdi)
+        const maxWidth = window.innerWidth * 0.9;
+        if (widthValue > maxWidth) {
+            widthValue = maxWidth;
+        }
         // Update the width of divtest based on the adjusted input value
         divtest.style.width = widthValue + "px";
     });
