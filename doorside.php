@@ -41,15 +41,15 @@ require "settings/init.php";
             <input type="text" class="form-control" id="doorwidth" placeholder="Centimeter" aria-label="width" aria-describedby="basic-addon1">
         </div>
         <a href="ditrum.php">
-            <button type="button" class="btn btn-primary btn-lg ps-4 pe-4 pt-2 pb-2">Opret Dit Rum</button>
+            <button type="button" class="btn btn-primary btn-lg ps-4 pe-4 pt-2 pb-2" style="background-color: #009950 border: none;"  >Opret Dit Rum</button>
         </a>
     </div>
 
     <div class="mt-5 col-12 col-md-8">
-        <div class="mb-3" id="divrum" style="border: 2px solid black; background-color: #F0E5DD; position: relative;">
-            <div id="divvindue" style="border: 1px solid black; background-color: #6f42c1; position: absolute; width: 100px; height: 100px;"></div>
-            <div id="divdoor" style="border: 1px solid black; background-color: #0f5132; position: absolute; width: 100px; height: 100px; cursor: grab;"></div>
-            <p class="text-center mt-3">Din Væg</p>
+        <div class="mb-3" id="divrum" style=" position: relative; background-image: linear-gradient(#8CB5CD , #3B5767)">
+            <div id="divvindue" style="border: 3px solid white; background-color: #6c757d; position: absolute; width: 100px; height: 100px; cursor: grab;"></div>
+            <div id="divdoor" style=" background-color: #D7AF63; position: absolute; width: 100px; height: 100px; cursor: grab;"></div>
+
         </div>
     </div>
 

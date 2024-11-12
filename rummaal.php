@@ -94,13 +94,13 @@ require "settings/init.php";
             <input type="text" class="form-control" id="width" placeholder="Centimeter" aria-label="width" aria-describedby="basic-addon1">
         </div>
         <a href="vindueside.php">
-            <button type="button" class="btn btn-primary btn-lg ps-4 pe-4 pt-2 pb-2 mb-3 ">Næste</button>
+            <button type="button" class="btn btn-primary btn-lg ps-4 pe-4 pt-2 pb-2 mb-3 " style="background-color: #009950 border: none;" >Næste</button>
         </a>
     </div>
 
     <div class="mt-5 col-12 col-md-8">
-        <div class="mb-3" id="divtest" style="height: 100px; width: 100px; border: 2px solid black; background-color: #F0E5DD">
-            <p class="text-center mt-3">Din Væg</p>
+        <div class="mb-3" id="divtest" style="height: 100px; width: 100px;  background-image: linear-gradient(#8CB5CD , #3B5767)">
+
         </div>
     </div>
 </div>

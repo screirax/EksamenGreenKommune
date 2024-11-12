@@ -69,7 +69,7 @@ session_start(); // Start sessionen for at gemme data
                     <p class="card-text"><?php echo $produkt ->prodBeskrivelse; ?> </p>
                     <p class="card-text"><?php echo $produkt ->prodPris ?></p>
                     <a href="ditrum.php?prodId=<?php echo $produkt->prodId; ?>">
-                        <button type="button" class="btn btn-primary btn-lg">Tilføj</button>
+                        <button type="button" class="btn btn-primary" style="background-color: #009950; border: none;" >Tilføj</button>
                     </a>
                 </div>
 <!--

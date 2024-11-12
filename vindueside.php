@@ -33,7 +33,7 @@ require "settings/init.php";
 <div class="container col-12 col-md-12 d-flex flex-column flex-md-row justify-content-between mt-1 bg-body-tertiary">
     <!-- Venstre kolonne med tekst og inputfelter til at angive dimensioner for et vindue -->
     <div class="col-12 col-md-4 mt-5">
-        <a href="rummaal.php" style="color: #000000"><i class="bi bi-arrow-left"></i>Tilbage</a>
+        <a href="rummaal.php" style="color: #0a58ca"><i class="bi bi-arrow-left"></i>Tilbage</a>
         <h3 class="text-left mt-2">Vindue</h3>
         <p>Her kan du skrive målene på dit vindue op og bevæge det med brug af mus hen hvor dit vindue normalt er</p>
         <div class="input-group mb-3 w-50 mt-4">
@@ -46,15 +46,15 @@ require "settings/init.php";
         </div>
         <!-- Næste-knap der leder videre til en anden side -->
         <a href="doorside.php">
-            <button type="button" class="btn btn-primary btn-lg ps-4 pe-4 pt-2 pb-2">Næste</button>
+            <button type="button" class="btn btn-primary btn-lg ps-4 pe-4 pt-2 pb-2 " style="background-color: #009950 border: none;" >Næste</button>
         </a>
     </div>
 
     <!-- Højre kolonne med div'er for at vise væg og vindue som en visuel repræsentation -->
     <div class="mt-5 col-12 col-md-8">
-        <div class="mb-3" id="divrum" style="border: 2px solid black; background-color: #F0E5DD; position: relative;">
-            <div id="divvindue" style="border: 1px solid black; background-color: #6f42c1; position: absolute; width: 100px; height: 100px; cursor: grab;"></div>
-            <p class="text-center mt-3">Din Væg</p>
+        <div class="mb-3" id="divrum" style=" position: relative; background-image: linear-gradient(#8CB5CD , #3B5767)">
+            <div id="divvindue" style="border: 3px solid white; background-color: #6c757d; position: absolute; width: 100px; height: 100px; cursor: grab;"></div>
+
         </div>
     </div>
 

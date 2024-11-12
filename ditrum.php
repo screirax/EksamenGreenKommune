@@ -2,16 +2,6 @@
 require "settings/init.php";
 session_start();
 
-if (isset($_GET['prodId'])) {
-    $prodId = $_GET['prodId'];
-
-    // Tilføj produktet til kurven (sessionen)
-    if (!isset($_SESSION['cart'])) {
-        $_SESSION['cart'] = [];
-    }
-    $_SESSION['cart'][] = $prodId;
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -42,6 +32,10 @@ if (isset($_GET['prodId'])) {
 
 
     <div class="col-12 col-md-4 mt-5">
+        <?php
+        $produkt = $db->sql("SELECT * FROM produkter WHERE prodId = 1");
+
+        ?>
         <div class="row row-cols-1 row-cols-md-2 g-4">
             <div class="col">
                 <div class="card-body">
@@ -72,10 +66,10 @@ if (isset($_GET['prodId'])) {
     </div>
 
     <div class="mt-5 col-12 col-md-8">
-        <div class="mb-3" id="divrum" style="border: 2px solid black; background-color: #F0E5DD; position: relative;">
-            <div id="divvindue" style="border: 1px solid black; background-color: #6f42c1; position: absolute; width: 100px; height: 100px;"></div>
-            <div id="divdoor" style="border: 1px solid black; background-color: #0f5132; position: absolute; width: 100px; height: 100px;"></div>
-            <p class="text-center mt-3">Din Væg</p>
+        <div class="mb-3" id="divrum" style=" position: relative; background-image: linear-gradient(#8CB5CD , #3B5767)">
+            <div id="divvindue" style="border: 3px solid white; background-color: #6c757d; position: absolute; width: 100px; height: 100px; cursor: grab;"></div>
+            <div id="divdoor" style=" background-color: #D7AF63; position: absolute; width: 100px; height: 100px; cursor: grab;"></div>
+
         </div>
     </div>
 
