@@ -1,5 +1,5 @@
 <?php
-// Inkluderer indstillinger og init-fil, sandsynligvis for databaseforbindelse og andre basale funktioner
+// Inkluderer settings/init.php, som sandsynligvis indeholder databaseforbindelse og basisfunktioner
 require "settings/init.php";
 ?>
 <!DOCTYPE html>
@@ -8,30 +8,30 @@ require "settings/init.php";
     <meta charset="utf-8">
     <title>ILVA</title>
 
-    <!-- Meta tags for SEO og copyright -->
+    <!-- Meta tags til SEO og copyright -->
     <meta name="robots" content="All">
     <meta name="author" content="Udgiver">
     <meta name="copyright" content="Information om copyright">
-    <!-- Inkluderer links til CSS, JS osv. fra links.php -->
+    <!-- Inkluderer CSS- og JavaScript-links fra en separat fil -->
     <?php include 'settings/links.php'?>
 
-    <!-- Responsiv viewport-indstilling -->
+    <!-- Indstilling for responsiv visning -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
 
-<!-- Inkluderer topsektion, sandsynligvis en header -->
+<!-- Inkluderer en øvre sektion, sandsynligvis en header -->
 <?php include 'settings/headertop.php';?>
 
 <div class="container-fluid">
-    <!-- Inkluderer header og menu i containeren -->
+    <!-- Inkluderer header og menu i en container -->
     <?php include 'settings/header.php';
     include 'settings/menu.php'?>
 </div>
 
 <div class="container col-12 col-md-12 d-flex flex-column flex-md-row justify-content-between mt-1 bg-body-tertiary">
-    <!-- Venstre kolonne med tekst og inputfelter til at angive dimensioner for et vindue -->
+
     <div class="col-12 col-md-4 mt-5">
         <a href="rummaal.php" style="color: #0a58ca"><i class="bi bi-arrow-left"></i>Tilbage</a>
         <h3 class="text-left mt-2">Vindue</h3>
@@ -50,61 +50,61 @@ require "settings/init.php";
         </a>
     </div>
 
-    <!-- Højre kolonne med div'er for at vise væg og vindue som en visuel repræsentation -->
+
+
+    <!-- Højre kolonne: Visuel repræsentation af væg og vindue -->
     <div class="mt-5 col-12 col-md-8">
         <div class="mb-3" id="divrum">
             <div id="divvindue" style="cursor: grab;"></div>
-
         </div>
     </div>
 
-    <!-- Script til at justere højden og bredden af vinduet baseret på brugerinput -->
-    <!-- Det er også her vi fjerner vores sessionstorage fra tidligere omrettelser af vinduer-->
+    <!-- Script til at justere vinduets størrelse baseret på input og session data -->
     <script>
         const vindueHeightInput = document.querySelector("#vindueheight");
         const vindueWidthInput = document.querySelector("#vinduewidth")
         const divvindue = document.querySelector("#divvindue");
 
-        // Fjerner specifikke værdier fra sessionStorage
+        // Sletter tidligere gemte vinduesdimensioner fra sessionStorage
         sessionStorage.removeItem("vindueHeight");
         sessionStorage.removeItem("vindueWidth");
         sessionStorage.removeItem("divvindueX");
         sessionStorage.removeItem("divvindueY");
 
-        // Eventlistener til højdeinputfeltet
+        // Lytter til ændringer i højdeinputfeltet
         vindueHeightInput.addEventListener("input", () => {
             let vindueHeightValue = vindueHeightInput.value;
 
-            // Hvis højde > 850 cm, skaleres værdien ned til det halve
+            // Hvis højde > 850 cm, halveres værdien for at passe til skærmen
             if (vindueHeightValue > 850) {
                 vindueHeightValue = vindueHeightValue / 2;
             }
-            divvindue.style.height = vindueHeightValue + "px"; // Opdaterer vinduets højde i DOM
+            divvindue.style.height = vindueHeightValue + "px"; // Opdaterer vinduets højde
         });
 
-        // Eventlistener til breddeinputfeltet
+        // Lytter til ændringer i breddeinputfeltet
         vindueWidthInput.addEventListener("input", () => {
             let vindueWidthValue = parseFloat(vindueWidthInput.value);
 
-            // Hvis bredde > 850 cm, skaleres værdien ned til det halve
+            // Hvis bredde > 850 cm, halveres værdien for at passe til skærmen
             if (vindueWidthValue > 850) {
                 vindueWidthValue = vindueWidthValue / 2;
             }
-            divvindue.style.width = vindueWidthValue + "px"; // Opdaterer vinduets bredde i DOM
+            divvindue.style.width = vindueWidthValue + "px"; // Opdaterer vinduets bredde
         });
 
-        // Funktion til at gemme inputdata for højde og bredde i sessionStorage
+        // Funktion til at gemme højde og bredde i sessionStorage
         function saveVindueInputDataToStorage() {
             sessionStorage.setItem("vindueHeight", vindueHeightInput.value);
             sessionStorage.setItem("vindueWidth", vindueWidthInput.value);
         }
 
-        // Gemmer data hver gang brugeren ændrer værdierne
+        // Gemmer data ved ændringer i inputfelterne
         vindueHeightInput.addEventListener("input", saveVindueInputDataToStorage);
         vindueWidthInput.addEventListener("input", saveVindueInputDataToStorage);
     </script>
 
-    <!-- Script til at hente og bruge gemte data fra sessionStorage -->
+    <!-- Script til at hente og bruge gemte dimensioner fra sessionStorage -->
     <script>
         const savedHeight = sessionStorage.getItem("height");
         const savedWidth = sessionStorage.getItem("width");
@@ -113,19 +113,19 @@ require "settings/init.php";
         const savedHeightSpan = document.getElementById("savedHeight");
         const savedWidthSpan = document.getElementById("savedWidth");
 
-        // Hvis gemte data findes, opdateres divrum's dimensioner og span-elementerne
+        // Hvis data er gemt, opdateres divrum og vises dimensioner
         if (savedHeight && savedWidth) {
             divrum.style.height = savedHeight + "px";
             divrum.style.width = savedWidth + "px";
             savedHeightSpan.textContent = savedHeight || "Ikke sat";
             savedWidthSpan.textContent = savedWidth || "Ikke sat";
         } else {
-            // Fejlmeddelelse, hvis data ikke er tilgængelige
+            // Fejlmeddelelse, hvis data mangler
             divrum.innerHTML = "<p style='color: red;'>Der er sket en fejl. Gå venligst tilbage til sidste side og prøv igen.</p>";
         }
     </script>
 
-    <!-- Script til at muliggøre træk-og-slip af vinduesdiv'en -->
+    <!-- Script til træk-og-slip-funktion for vinduesdiv'en -->
     <script>
         const divvinduemove = document.querySelector("#divvindue");
         const divrummove = document.querySelector("#divrum");
@@ -133,7 +133,7 @@ require "settings/init.php";
         let isDragging = false;
         let offsetX, offsetY;
 
-        // Starter trækbevægelse ved mousedown
+        // Begynder trækbevægelsen ved mousedown
         divvinduemove.addEventListener("mousedown", (event) => {
             isDragging = true;
             offsetX = event.clientX - divvinduemove.offsetLeft;
@@ -141,13 +141,13 @@ require "settings/init.php";
             divvinduemove.style.cursor = "grabbing";
         });
 
-        // Flytter element ved mousemove
+        // Flytter elementet ved mousemove
         document.addEventListener("mousemove", (event) => {
             if (isDragging) {
                 let x = event.clientX - offsetX;
                 let y = event.clientY - offsetY;
 
-                // Begrænser bevægelsen inden for grænserne af divrum
+                // Begrænser trækbevægelsen inden for divrum
                 const divrumRect = divrummove.getBoundingClientRect();
                 const divvindueRect = divvinduemove.getBoundingClientRect();
 
@@ -173,7 +173,7 @@ require "settings/init.php";
     </script>
 </div>
 
-<!-- Sektion der er udkommenteret, sandsynligvis for at hente og vise produkter fra databasen -->
+<!-- Sektion til fremtidig brug: Udtaget kode til visning af produkter fra databasen -->
 <?php /*
 <div class="row g-2">
 	<?php
@@ -189,19 +189,19 @@ require "settings/init.php";
 				</div>
                 <div class="card-body">
                     <?php
-                    echo '<img src="data:image/jpeg;base64,' . base64_encode($produkt->prodBillede
+                    echo '<img src="data:image/jpeg;base64,' . base64_encode($produkt->prodBillede)
                     ?>
                 </div>
 
 				<div class="card-body">
 					<?php
-					// Indsæt andet felt fra database
+					// Viser produktbeskrivelse
                     echo $produkt->prodBeskrivelse;
 					?>
 				</div>
 				<div class="card-footer text-muted">
 					<?php
-					// Indsæt andet felt fra database
+					// Viser produktpris formateret
                     echo number_format($produkt->prodPris, 2, ',', '.'). " DKK";
 					?>
 				</div>
@@ -212,7 +212,7 @@ require "settings/init.php";
 	?>
 </div>
 */?>
-<!--Inkludere buttomscripts og footer-->
+<!-- Inkluderer scripts og footer -->
 <?php include 'settings/buttomscripts.php';
 include 'settings/footer.php';?>
 </body>
