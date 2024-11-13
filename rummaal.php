@@ -99,7 +99,7 @@ require "settings/init.php";
     </div>
 
     <div class="mt-5 col-12 col-md-8">
-        <div class="mb-3" id="divtest" style="height: 100px; width: 100px;  background-image: linear-gradient(#8CB5CD , #3B5767)">
+        <div class="mb-3" id="divrum">
 
         </div>
     </div>
@@ -111,7 +111,7 @@ require "settings/init.php";
     // Select the input field and div element
     const heightInput = document.querySelector("#height");
     const widthInput = document.querySelector("#width")
-    const divtest = document.querySelector("#divtest");
+    const divtest = document.querySelector("#divrum");
 
 
     // Fjerner specifikke værdier fra sessionStorage

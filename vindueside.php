@@ -52,8 +52,8 @@ require "settings/init.php";
 
     <!-- Højre kolonne med div'er for at vise væg og vindue som en visuel repræsentation -->
     <div class="mt-5 col-12 col-md-8">
-        <div class="mb-3" id="divrum" style=" position: relative; background-image: linear-gradient(#8CB5CD , #3B5767)">
-            <div id="divvindue" style="border: 3px solid white; background-color: #6c757d; position: absolute; width: 100px; height: 100px; cursor: grab;"></div>
+        <div class="mb-3" id="divrum">
+            <div id="divvindue" style="cursor: grab;"></div>
 
         </div>
     </div>

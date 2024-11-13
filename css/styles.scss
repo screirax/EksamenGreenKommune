@@ -103,6 +103,27 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 .custom-header a:hover {
 	color: white;
 }
+
+#divrum{
+	height: 100px;
+	width: 100px;
+	position: relative;
+	background-image: linear-gradient(#8CB5CD , #3B5767)
+}
+#divvindue{
+	border: 3px solid white;
+	background-color: #6c757d;
+	position: absolute;
+	width: 100px;
+	height: 100px;
+}
+#divdoor{
+	background-color: #D7AF63;
+	position: absolute;
+	width: 100px;
+	height: 100px;
+}
+
 .footer {
 	background-color: #333;
 	color: white;

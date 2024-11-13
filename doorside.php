@@ -46,9 +46,9 @@ require "settings/init.php";
     </div>
 
     <div class="mt-5 col-12 col-md-8">
-        <div class="mb-3" id="divrum" style=" position: relative; background-image: linear-gradient(#8CB5CD , #3B5767)">
-            <div id="divvindue" style="border: 3px solid white; background-color: #6c757d; position: absolute; width: 100px; height: 100px; cursor: grab;"></div>
-            <div id="divdoor" style=" background-color: #D7AF63; position: absolute; width: 100px; height: 100px; cursor: grab;"></div>
+        <div class="mb-3" id="divrum">
+            <div id="divvindue"></div>
+            <div id="divdoor" style="cursor: grab;"></div>
 
         </div>
     </div>

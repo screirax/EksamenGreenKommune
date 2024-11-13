@@ -31,44 +31,106 @@ session_start();
 <div class="container col-12 col-md-12 d-flex flex-column flex-md-row justify-content-between mt-1 bg-body-tertiary">
 
 
-    <div class="col-12 col-md-4 mt-5">
-        <?php
-        $produkt = $db->sql("SELECT * FROM produkter WHERE prodId = 1");
 
-        ?>
-        <div class="row row-cols-1 row-cols-md-2 g-4">
-            <div class="col">
-                <div class="card-body">
-                    <img src="data:image/jpeg;base64,<?php echo base64_encode($produkt->prodBillede); ?>" alt="Produkt billede" style="width: 200px; height: 200px;">
 
+
+        <div class="col-12 col-md-4 mt-4">
+            <?php
+
+
+            // Tjekker om et produkt-ID er angivet i URL’en
+            /*if (isset($_GET['prodId'])) {
+                $testerId = $_GET['prodId'];
+                echo"$testerId";
+                $produktStmt = $db->sql("SELECT * FROM produkter WHERE prodId = ?", [$testerId]);
+                $produkt = $produktStmt->fetch(PDO::FETCH_ASSOC); // Fetch as associative array
+                // Tjekker om produktet blev fundet
+                    if ($produkt) {
+                        // Udskriv de enkelte felter i $produkt-arrayet
+                        echo "Produktnavn: " . $produkt['prodNavn'] . "<br>";
+                        echo "Beskrivelse: " . $produkt['prodBeskrivelse'] . "<br>";
+                        echo "Pris: " . $produkt['prodPris'] . " DKK<br>";
+                    } else {
+                        echo "Produktet blev ikke fundet.";
+                    }*/
+
+            if (isset($_GET['prodId'])) {
+                $testerId = $_GET['prodId'];
+                $produkter = $db->sql("SELECT * FROM produkter");
+
+                foreach ($produkter as $produkt) {
+                    $prodId = $produkt->prodId;
+                    $prodNavn = $produkt->prodNavn;
+                    $prodBeskivelse = $produkt->prodBeskrivelse;
+                    $prodPris = $produkt->prodPris;
+                    $prodBillede = $produkt->prodBillede;
+
+                    if ($prodId == $testerId) {
+                        ?>
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <div class="card-body">
+                                    <?php
+                                    echo '<img src="data:image/jpeg;base64,' . base64_encode($produkt->prodBillede) . '" alt="Produkt billede" style="width: 200px; height: 200px;">';
+                                    ?>
+                                </div>
+                                <div class="card-body mb-3"">
+                                <h5 class="card-title"><?php echo $prodNavn; ?></h5>
+                                <p class="card-text"><?php echo $prodBeskivelse; ?></p>
+                                <p class="card-text"><?php echo $prodPris; ?></p>
+
+                                </div>
+                            </div>
+                        </div>
                     <?php
-                    //echo $produkt->prodNavn;
-                    ?>
+                    }
 
+
+                    }
+                }
+            else {
+                ?>
+                <div class="row row-cols-1 row-cols-md-2 g-4 ">
+                    <div class="col-12 col-md-12 mt-4"> <!-- Change this to col-12 col-md-12 to make it fill the entire row -->
+                        <div class="card-body">
+                            <h3 class='text-left mt-2'>Dit Rum</h3>
+                            <p>Du er nu i stand til at klikke på fra vores kataloger og sætte ind på din væg</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body mb-3">
-                    <h5 class="card-title"><?php echo $produkt ->prodNavn; ?></h5>
-                    <?php
-                    //echo '<img src="data:image/jpeg;base64,' . base64_encode($produkt->prodBillede) . '" alt="Produkt billede" style="max-width:100%; height: auto;">';
-                    ?>
-                    <p class="card-text"><?php echo $produkt ->prodBeskrivelse; ?> </p>
-                    <p class="card-text"><?php echo $produkt ->prodPris ?></p>
-                    <a href="ditrum.php?prodId=<?php echo $produkt->prodId; ?>">
-                        <button type="button" class="btn btn-primary btn-lg">Tilføj</button>
-                    </a>
-                </div>
-            </div>
+                <?php
+            }
+            ?>
+
         </div>
 
-        <h3 class="text-left mt-2">Dit Rum</h3>
-        <p>Du er nu i stand til at klikke på på fra vores kataloger og sætte ind på din væg</p>
 
-    </div>
 
     <div class="mt-5 col-12 col-md-8">
-        <div class="mb-3" id="divrum" style=" position: relative; background-image: linear-gradient(#8CB5CD , #3B5767)">
-            <div id="divvindue" style="border: 3px solid white; background-color: #6c757d; position: absolute; width: 100px; height: 100px; cursor: grab;"></div>
-            <div id="divdoor" style=" background-color: #D7AF63; position: absolute; width: 100px; height: 100px; cursor: grab;"></div>
+        <div class="mb-3" id="divrum">
+            <div id="divvindue"></div>
+            <div id="divdoor"></div>
+
+                <div id="flytteSofa">
+                    <?php
+                    foreach ($produkter as $produkt) {
+                        $prodId = $produkt->prodId;
+                        $prodNavn = $produkt->prodNavn;
+                        $prodBeskivelse = $produkt->prodBeskrivelse;
+                        $prodPris = $produkt->prodPris;
+                        $prodBillede = $produkt->prodBillede;
+
+                        if ($prodId == $testerId) {
+                            ?>
+                            <div id="sofaMove" style="position: absolute; cursor: grab">
+                              <?php     echo '<img src="data:image/jpeg;base64,' . base64_encode($prodBillede) . '" alt="Sofa Image" style="width: 200px; height: 200px;">';
+                              ?></div>
+                            <?php
+
+                        }
+                    }
+                    ?>
+                </div>
 
         </div>
     </div>
@@ -193,7 +255,47 @@ session_start();
             }
         });
     </script>
+    <!--Bevæger sofa rundt-->
+<script>
+    const divsofamove = document.querySelector("#sofaMove");
+    const divrummove = document.querySelector("#divrum");
 
+    let isDragging = false;
+    let offsetX, offsetY;
+
+    // Start dragging on mousedown
+    divsofamove.addEventListener("mousedown", (event) => {
+        isDragging = true;
+        offsetX = event.clientX - divsofamove.offsetLeft;
+        offsetY = event.clientY - divsofamove.offsetTop;
+        divsofamove.style.cursor = "grabbing";
+    });
+
+    // Move the sofa on mousemove
+    document.addEventListener("mousemove", (event) => {
+        if (isDragging) {
+            let x = event.clientX - offsetX;
+            let y = event.clientY - offsetY;
+
+            // No boundaries, just move the element freely
+            divsofamove.style.left = x + "px";
+            divsofamove.style.top = y + "px";
+        }
+    });
+
+    // Stop dragging on mouseup and save position to sessionStorage
+    document.addEventListener("mouseup", () => {
+        if (isDragging) {
+            isDragging = false;
+            divsofamove.style.cursor = "grab";
+            const currentX = divsofamove.offsetLeft;
+            const currentY = divsofamove.offsetTop;
+            sessionStorage.setItem("divsofaX", currentX);
+            sessionStorage.setItem("divsofaY", currentY);
+        }
+    });
+
+</script>
 
 
 </div>
