@@ -22,124 +22,202 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 	box-sizing: border-box;
 	padding: 0;
 	margin: 0;
+	font-family: "Nunito", serif;
 }
 
-
-.nav-menu{
-	font-family: Arial, sans-serif;
+.category-header {
+	font-weight: bold;
+	margin-top: 20px;
+}
+.item-card {
 	display: flex;
-	justify-content: center;
+	justify-content: space-between;
 	align-items: center;
-	height: 9vw;
-	background-color: #f5f5f5;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 8px;
+	margin-bottom: 10px;
 }
-.nav-menu ul {
-	list-style: none;
-	display: flex;
-	gap: 6vw;
+#box{
+	border-radius: 25px;
 }
-
-.nav-menu li a {
-	text-align: center;
-	color: #333;
-	text-decoration: none;
+.item-icon {
+	width: 40px;
+	height: 40px;
 }
-
-.nav-menu img {
-	width: 50px;  /* adjust as needed */
-	height: 50px;
-	transition: transform 0.3s ease;
+.btn-edit {
+	background-color: #007bff;
+	color: white;
 }
-
-.nav-menu img:hover {
-	transform: scale(1.1); /* zoom effect on hover */
+.btn-edit:hover {
+	background-color: #0056b3;
 }
-
-.nav-menu span {
-	display: block;
-	justify-content: center;
-	align-content: center;
-	margin-top: 5px;
-	font-size: 14px;
-
+.danger {
+	background-color: #f8d7da;
 }
-
-@media (max-width: 576px) {
-	img {
-		max-width: 80%; /* Billedet vil tage 80% af containerens bredde */
-		height: auto;
-	}
+.warning {
+	background-color: #fff3cd;
 }
-.icon-row {
-	display: flex;
-	gap: 20px;
-	align-items: center;
-}
-.icon {
-	font-size: 24px;
-	position: relative;
-	color: #333;
-}
-.icon-badge {
-	position: absolute;
-	top: -5px;
-	right: -10px;
-	background-color: #f8f9fa;
-	color: #333;
-	border-radius: 50%;
-	font-size: 12px;
-	padding: 2px 5px;
+.btn-custom {
+	background-color: #007bff; /* Bootstrap blå */
+	color: white;
+	border: 2px solid black;
+	border-radius: 50px 50px 50px 50px; /* Giver den unikke form */
+	padding: 5px 15px;
 	font-weight: bold;
 }
-.custom-header {
-	background-color: #333;
+.btn-custom:hover {
+	background-color: #0056b3; /* Mørkere blå på hover */
 	color: white;
-	padding: 5px 0;
 }
-.custom-header a {
-	color: #b0b0b0;
-	text-decoration: none;
+p{
+	font-family: 'Nunito', serif;
 }
-.custom-header a:hover {
+.toggle-buttons {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 10px;
+}
+.toggle-buttons .btn {
+	border-radius: 30px; /* Afrundede hjørner */
+}
+.toggle-buttons .btn.active {
+	background-color: #007bff; /* Blå baggrund for aktiv knap */
 	color: white;
 }
 
-#divrum{
-	height: 100px;
-	width: 100px;
-	position: relative;
-	background-image: linear-gradient(#8CB5CD , #3B5767)
+/* Stil til footer-navigation */
+.footer-menu {
+	background-color: #f5f5f5;
+	padding: 10px 0;
+	border-top: 1px solid #ddd;
 }
-#divvindue{
-	border: 3px solid white;
-	background-color: #6c757d;
+.footer-menu .nav-link {
+	color: black;
+	text-align: center;
+	font-size: 12px;
+}
+.footer-menu .nav-link.active {
+	color: #007bff; /* Fremhæv aktiv side med blå */
+}
+.footer-menu i {
+	font-size: 20px; /* Ikon størrelse */
+	display: block;
+}
+
+.custom-card {
+	position: relative; /* Gør det muligt at placere stjernen */
+	display: flex;
+	align-items: center;
+	border: 2px solid black; /* Sort kant */
+	border-radius: 15px; /* Afrundede hjørner */
+	overflow: hidden; /* Sørger for, at billedet følger formen */
+}
+.custom-card img {
+	width: 100px; /* Fast bredde på billedet */
+	height: 100px; /* Fast højde på billedet */
+	object-fit: cover; /* Sørger for, at billedet bevarer proportioner */
+}
+.custom-card-content {
+	flex: 1; /* Fylder det resterende rum */
+	padding: 10px;
+}
+.custom-card-button {
+	margin-right: 10px;
+}
+
+
+/* Favoritstjerne */
+.favorite-star {
 	position: absolute;
-	width: 100px;
-	height: 100px;
-}
-#divdoor{
-	background-color: #D7AF63;
-	position: absolute;
-	width: 100px;
-	height: 100px;
+	top: 10px;
+	left: 10px;
+	font-size: 18px;
+	color: #F32D2E;
+	background-color: white;
+	border-radius: 50%;
+	padding: 2px 5px;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+	cursor: pointer; /* Markør ændres til hånd */
+	transition: transform 0.2s ease, color 0.2s ease;
 }
 
-.footer {
-	background-color: #333;
-	color: white;
-	padding: 40px 0;
+/* Hvis ikke-favorit */
+.favorite-star.not-favorite {
+	color: lightgray; /* Lys grå farve */
 }
-.footer a {
-	color: #ffffff;
-	text-decoration: none;
 
+/* Animation ved klik */
+.favorite-star.clicked {
+	transform: scale(1.2); /* Forstør kortvarigt */
 }
-.footer a:hover {
-	color: white;
+.recipe-card {
+	border: 2px solid black;
+	border-radius: 15px;
+	padding: 15px;
+	background-color: #fff;
+	overflow: hidden;
 }
-.footer .social-icons a {
-	margin-right: 15px;
+.recipe-image {
+	border-radius: 15px;
+	width: 100%;
+	height: auto;
+	margin-bottom: 15px;
 }
-.footer .social-icons a:hover {
-	color: #007bff;
+.back-button {
+	font-size: 24px;
+	display: inline-block;
+	margin-bottom: 10px;
+	cursor: pointer;
 }
+.recipe-title {
+	font-size: 20px;
+	font-weight: bold;
+	text-align: center;
+	margin-bottom: 15px;
+}
+.ingredients,
+.instructions {
+	margin-bottom: 15px;
+}
+.ingredients h5,
+.instructions h5 {
+	text-decoration: underline;
+}
+.icon-container {
+	background-color: #c6f6d5;
+	border-radius: 15px;
+	height: 120px;
+	width: 120px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 20px auto;
+}
+.icon-container i {
+	font-size: 40px;
+	color: #000;
+}
+.input-fields {
+	margin: 20px 0;
+}
+.input-fields .form-control {
+	border-radius: 15px;
+	text-align: center;
+}
+.dropdown-menu {
+	border-radius: 15px;
+}
+.add-button {
+	margin-top: 20px;
+	border-radius: 20px;
+	font-size: 18px;
+	padding: 10px 30px;
+	background-color: #007bff;
+	color: #fff;
+	border: none;
+}
+.add-button:hover {
+	background-color: #0056b3;
+}
+//slutter her

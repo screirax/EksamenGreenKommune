@@ -24,6 +24,7 @@ require "settings/init.php";
     <!-- Gør siden responsiv og tilpasset forskellige skærmstørrelser -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+
 </head>
 
 
@@ -47,96 +48,62 @@ require "settings/init.php";
     </div>
 
     <!-- Gæster -->
-    <h5 class="category-header">Grøntsager</h5>
-
-    <div class="item-card" id="box">
-        <div class="col ms-2 mt-1">
-            <img src="pictures/carrot.png" alt="Carrot" class="item-icon">
-        </div>
-        <div class="col-6">
-            <p>Øko-Gulerødder</p>
-            <p class="mb-2">Antal: 5</p>
-
-        </div>
-        <div class="col">
-            <a href="rediger.php"> <button class="btn btn-custom mt-1">Rediger</button></a>
-        </div>
-    </div>
-
-    <div class="item-card warning" id="box">
-        <div class="col ms-2 mt-1">
-            <img src="pictures/Tomato.png" alt="Carrot" class="item-icon">
-        </div>
-        <div class="col-6">
-            <p>Tomatter</p>
-            <p class="mb-2">Antal: 3</p>
-
-        </div>
-        <a href="rediger.php"><div class="col">
-             <button class="btn btn-custom mt-1">Rediger</button>
-        </div></a>
-    </div>
-
-    <div class="item-card" id="box">
-        <div class="col ms-2 mt-1">
-            <img src="pictures/pepper.png" alt="Carrot" class="item-icon">
-        </div>
-        <div class="col-6">
-            <p>Peberfrugt</p>
-            <p class="mb-2">Antal: 3</p>
-
-        </div>
-        <div class="col">
-            <a href="rediger.php"> <button class="btn btn-custom mt-1">Rediger</button></a>
-        </div>
-    </div>
-
-
-
-    <!-- Kolde varer -->
-    <h5 class="category-header">Kød</h5>
-    <div class="item-card danger" id="box">
-        <div class="col ms-2 mt-1">
-            <img src="pictures/rejer.png" alt="Rejer" class="item-icon">
-        </div>
-        <div class="col-6">
-            <p>Rejer</p>
-            <p class="mb-2">Antal: 3</p>
-
-        </div>
-        <div class="col">
-            <a href="rediger.php"> <button class="btn btn-custom mt-1">Rediger</button></a>
-        </div>
-    </div>
-    <div class="item-card" id="box">
-        <div class="col ms-2 mt-1">
-            <img src="pictures/beef.png" alt="Steak" class="item-icon">
-        </div>
-        <div class="col-6">
-            <p>Angus Steaks</p>
-            <p class="mb-2">Antal: 2</p>
-
-        </div>
-        <div class="col">
-            <a href="rediger.php"> <button class="btn btn-custom mt-1">Rediger</button></a>
-        </div>
-    </div>
-
-    <!-- Navigation -->
+    <h5 class="category-header">Opskrifter</h5>
     <div class="container">
         <!-- Toggle buttons -->
 
         <div class="toggle-buttons">
-            <a href="fryser.php"> <button class="btn btn-outline-primary " style="border-radius: 50px 0px 00px 50px">Fryser</button></a>
-            <a href="index.php"> <button class="btn btn-outline-primary active" style="border-radius: 00px 0px 00px 00px">Køleskab</button></a>
-            <a href="pantry.php"> <button class="btn btn-outline-primary" style="border-radius: 00px 50px 50px 00px">Pantry</button></a>
+            <a href="opskrifter.php"> <button class="btn btn-outline-primary " style="border-radius: 50px 0px 00px 50px">Opskrifter</button></a>
+
+            <a href="favorit.php"> <button class="btn btn-outline-primary active" style="border-radius: 00px 50px 50px 00px">Favoritter</button></a>
         </div>
     </div>
+
+    <div class="container mt-5">
+
+        <div class="custom-card mt-1">
+            <div class="favorite-star not-favorite"  style="color: #F32D2E">
+                ★
+            </div>
+
+            <!-- Billede -->
+            <img src="pictures/chiliconcarne.png" alt="Chili-con Carne">
+
+            <!-- Tekstindhold -->
+            <div class="custom-card-content">
+                <h5 class="mb-0">Chili-con Carne med Ris</h5>
+            </div>
+
+            <!-- Knap -->
+            <div class="custom-card-button">
+                <a href="opskrift.php"> <button class="btn btn-primary">Se</button></a>
+            </div>
+        </div>
+        <div class="custom-card mt-1">
+            <div class="favorite-star not-favorite" style="color: #F32D2E">
+                ★
+            </div>
+            <!-- Billede -->
+            <img src="pictures/spaghettimedrejer.png" alt="Spaghetti med rejer">
+
+            <!-- Tekstindhold -->
+            <div class="custom-card-content">
+                <h5 class="mb-0">Spaghetti med Rejer </h5>
+            </div>
+
+            <!-- Knap -->
+            <div class="custom-card-button">
+                <a href="opskrift.php"> <button class="btn btn-primary">Se</button></a>
+            </div>
+        </div>
+
+    </div>
+
 
     <!-- Footer menu -->
     <footer class="footer-menu">
         <div class="container d-flex justify-content-around">
-            <a href="opskrifter.php" class="nav-link ">
+            <a href="opskrifter.php" class="nav-link active">
                 <i class="bi bi-book"></i>
                 Opsrifter
             </a>
@@ -162,7 +129,26 @@ require "settings/init.php";
 include 'settings/buttomscripts.php';
 
 ?>
+<script>
+    // Find stjernen
+    document.querySelectorAll('.favorite-star').forEach(star => {
+        star.addEventListener('click', function () {
+            // Toggle "not-favorite"-klassen
+            this.classList.toggle('not-favorite');
 
+            // Tilføj en kort "klik"-animation
+            this.classList.add('clicked');
+            setTimeout(() => this.classList.remove('clicked'), 200);
+
+            // Log status (valgfrit)
+            if (this.classList.contains('not-favorite')) {
+                console.log('Fjernet fra favoritter');
+            } else {
+                console.log('Tilføjet til favoritter');
+            }
+        });
+    });
+</script>
 </body>
 </html>
 <!--

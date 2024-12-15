@@ -24,6 +24,7 @@ require "settings/init.php";
     <!-- Gør siden responsiv og tilpasset forskellige skærmstørrelser -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+
 </head>
 
 
@@ -51,11 +52,11 @@ require "settings/init.php";
 
     <div class="item-card" id="box">
         <div class="col ms-2 mt-1">
-            <img src="pictures/carrot.png" alt="Carrot" class="item-icon">
+            <img src="pictures/celeri.png" alt="Celeri" class="item-icon">
         </div>
         <div class="col-6">
-            <p>Øko-Gulerødder</p>
-            <p class="mb-2">Antal: 5</p>
+            <p>Celeri</p>
+            <p class="mb-2">Antal: 3</p>
 
         </div>
         <div class="col">
@@ -65,16 +66,16 @@ require "settings/init.php";
 
     <div class="item-card warning" id="box">
         <div class="col ms-2 mt-1">
-            <img src="pictures/Tomato.png" alt="Carrot" class="item-icon">
+            <img src="pictures/carrot.png" alt="Carrot" class="item-icon">
         </div>
         <div class="col-6">
-            <p>Tomatter</p>
-            <p class="mb-2">Antal: 3</p>
+            <p>Gulerødder</p>
+            <p class="mb-2">Antal: 7</p>
 
         </div>
         <a href="rediger.php"><div class="col">
-             <button class="btn btn-custom mt-1">Rediger</button>
-        </div></a>
+                <button class="btn btn-custom mt-1">Rediger</button>
+            </div></a>
     </div>
 
     <div class="item-card" id="box">
@@ -95,13 +96,13 @@ require "settings/init.php";
 
     <!-- Kolde varer -->
     <h5 class="category-header">Kød</h5>
-    <div class="item-card danger" id="box">
+    <div class="item-card" id="box">
         <div class="col ms-2 mt-1">
-            <img src="pictures/rejer.png" alt="Rejer" class="item-icon">
+            <img src="pictures/sasauge.png" alt="Pølser" class="item-icon">
         </div>
         <div class="col-6">
-            <p>Rejer</p>
-            <p class="mb-2">Antal: 3</p>
+            <p>Pølser</p>
+            <p class="mb-2">Antal: 5</p>
 
         </div>
         <div class="col">
@@ -113,8 +114,8 @@ require "settings/init.php";
             <img src="pictures/beef.png" alt="Steak" class="item-icon">
         </div>
         <div class="col-6">
-            <p>Angus Steaks</p>
-            <p class="mb-2">Antal: 2</p>
+            <p>Bøffer</p>
+            <p class="mb-2">Antal: 4</p>
 
         </div>
         <div class="col">
@@ -127,8 +128,8 @@ require "settings/init.php";
         <!-- Toggle buttons -->
 
         <div class="toggle-buttons">
-            <a href="fryser.php"> <button class="btn btn-outline-primary " style="border-radius: 50px 0px 00px 50px">Fryser</button></a>
-            <a href="index.php"> <button class="btn btn-outline-primary active" style="border-radius: 00px 0px 00px 00px">Køleskab</button></a>
+            <a href="fryser.php"> <button class="btn btn-outline-primary active" style="border-radius: 50px 0px 00px 50px">Fryser</button></a>
+            <a href="index.php"> <button class="btn btn-outline-primary " style="border-radius: 00px 0px 00px 00px">Køleskab</button></a>
             <a href="pantry.php"> <button class="btn btn-outline-primary" style="border-radius: 00px 50px 50px 00px">Pantry</button></a>
         </div>
     </div>
@@ -136,7 +137,7 @@ require "settings/init.php";
     <!-- Footer menu -->
     <footer class="footer-menu">
         <div class="container d-flex justify-content-around">
-            <a href="opskrifter.php" class="nav-link ">
+            <a href="opskrifter.php" class="nav-link">
                 <i class="bi bi-book"></i>
                 Opsrifter
             </a>
